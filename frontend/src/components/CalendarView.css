@@ -1,0 +1,367 @@
+/* src/components/CalendarView.css */
+.calendar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.nav-button {
+  background: #667eea;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  background: #5a67d8;
+  transform: scale(1.1);
+}
+
+.next-due-info {
+  margin-bottom: 2rem;
+}
+
+.due-date-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.due-date-card h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.due-date {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.overdue-warning {
+  color: #ffe066;
+  font-weight: bold;
+  margin: 0.5rem 0 0 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-color.pending { background-color: #ffa500; }
+.legend-color.in-progress { background-color: #2196f3; }
+.legend-color.completed { background-color: #ff9800; }
+.legend-color.approved { background-color: #4caf50; }
+.legend-color.due { background-color: #e74c3c; }
+
+.calendar-grid {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: #f8f9fa;
+}
+
+.weekday {
+  padding: 1rem;
+  text-align: center;
+  font-weight: 600;
+  color: #666;
+  border-right: 1px solid #e0e0e0;
+}
+
+.weekday:last-child {
+  border-right: none;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day {
+  min-height: 120px;
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.calendar-day:hover {
+  background: #f8f9fa;
+}
+
+.calendar-day:nth-child(7n) {
+  border-right: none;
+}
+
+.calendar-day.empty {
+  cursor: default;
+  background: #fafafa;
+}
+
+.calendar-day.today {
+  background: #e3f2fd;
+  border: 2px solid #2196f3;
+}
+
+.calendar-day.due {
+  background: #ffebee;
+  border: 2px solid #e74c3c;
+}
+
+.calendar-day.overdue {
+  background: #ffcdd2;
+  border: 2px solid #d32f2f;
+  animation: pulse 2s infinite;
+}
+
+.calendar-day.selected {
+  background: #f3e5f5;
+  border: 2px solid #9c27b0;
+}
+
+.day-number {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.cleaning-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: 0.5rem;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.indicator.pending { background-color: #ffa500; }
+.indicator.in-progress { background-color: #2196f3; }
+.indicator.completed { background-color: #ff9800; }
+.indicator.approved { background-color: #4caf50; }
+
+.due-indicator, .overdue-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 0.6rem;
+  font-weight: bold;
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: white;
+}
+
+.due-indicator {
+  background-color: #e74c3c;
+}
+
+.overdue-indicator {
+  background-color: #d32f2f;
+  animation: pulse 2s infinite;
+}
+
+.selected-date-details {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.selected-date-details h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.cleaning-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cleaning-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.cleaning-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.cleaning-info span {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.pending { background-color: #ffa500; }
+.status-badge.in-progress { background-color: #2196f3; }
+.status-badge.completed { background-color: #ff9800; }
+.status-badge.approved { background-color: #4caf50; }
+
+.cleaning-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cleaning-dates small {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  .calendar-header h2 {
+    font-size: 1.4rem;
+  }
+  
+  .calendar-legend {
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+  
+  .legend-item {
+    font-size: 0.8rem;
+  }
+  
+  .calendar-day {
+    min-height: 80px;
+    padding: 0.25rem;
+  }
+  
+  .day-number {
+    font-size: 0.9rem;
+  }
+  
+  .cleaning-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .due-date-card {
+    padding: 1rem;
+  }
+  
+  .due-date {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .weekday {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.8rem;
+  }
+  
+  .calendar-day {
+    min-height: 60px;
+  }
+  
+  .day-number {
+    font-size: 0.8rem;
+  }
+  
+  .indicator {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .due-indicator, .overdue-indicator {
+    font-size: 0.5rem;
+    padding: 1px 2px;
+  }
+}

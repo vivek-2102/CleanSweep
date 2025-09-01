@@ -16,4 +16,4 @@ router.put('/:notificationId/read', markNotificationRead);
 router.put('/mark-all-read', markAllNotificationsRead);
 router.delete('/:notificationId', deleteNotification);
 
-module.exports = router;
+module.exports = router; 

@@ -209,10 +209,8 @@ function Login() {
                 <option value="admin">Admin</option>
               </select>
             </div>
-            
-            {formData.role === 'student' && (
-              <>
-                <div className="form-group">
+
+              <div className="form-group">
                   <label>Hostel Number:</label>
                   <input
                     type="text"
@@ -223,6 +221,10 @@ function Login() {
                     required
                   />
                 </div>
+            
+            {formData.role === 'student' && (
+              <>
+               
                 <div className="form-group">
                   <label>Room Number:</label>
                   <input

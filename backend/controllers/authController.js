@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const { findById } = require('./notificationController');
 
 const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET || 'your-secret-key', {
@@ -54,11 +55,11 @@ exports.register = async (req, res) => {
       collegeId,
       name,
       password,
-      role
+      role,
+      hostelNumber
     };
 
     if (role === 'student') {
-      userData.hostelNumber = hostelNumber;
       userData.roomNumber = roomNumber;
       
       // Assign sweeper based on floor
@@ -73,6 +74,18 @@ exports.register = async (req, res) => {
 
     const user = new User(userData);
     await user.save();
+    if (role === "sweeper") {
+      await User.updateMany(
+        {
+          role: "student",
+          hostelNumber: userData.hostelNumber,
+          roomNumber: { $regex: `^${floorNumber}` }  // students on same floor
+        },
+        {
+          $set: { assignedSweeper: user._id }  // assign sweeper
+        }
+      );
+    }
 
     const token = generateToken(user._id);
     
@@ -88,6 +101,7 @@ exports.register = async (req, res) => {
         floorNumber: user.floorNumber
       }
     });
+
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }

@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   },
   hostelNumber: {
     type: String,
-    required: function() { return this.role === 'student'; }
+    required: true
   },
   roomNumber: {
     type: String,

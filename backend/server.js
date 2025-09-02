@@ -48,7 +48,7 @@ app.listen(PORT, () => {
 });
 
 
-const path = require('path'); 
+const path = require('path');
 
 // Serve static files from the React app
 const frontendPath = path.join(__dirname, '../frontend/build');

@@ -31,17 +31,17 @@ app.use('/api/student', studentRoutes);
 app.use('/api/sweeper', sweeperRoutes);
 app.use('/api/notifications', notificationRoutes);
 
-// Set up cron job to check due dates daily at 9 AM
-cron.schedule('0 9 * * *', () => {
-  console.log('Running daily due date check...');
-  checkDueDatesAndNotify();
-});
+// // Set up cron job to check due dates daily at 9 AM
+// cron.schedule('0 9 * * *', () => {
+//   console.log('Running daily due date check...');
+//   checkDueDatesAndNotify();
+// });
 
-// Also run check every hour during the day (9 AM to 9 PM)
-cron.schedule('0 9-21 * * *', () => {
-  console.log('Running hourly reminder check...');
-  checkDueDatesAndNotify();
-});
+// // Also run check every hour during the day (9 AM to 9 PM)
+// cron.schedule('0 9-21 * * *', () => {
+//   console.log('Running hourly reminder check...');
+//   checkDueDatesAndNotify();
+// });
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

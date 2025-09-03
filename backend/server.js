@@ -10,11 +10,17 @@ const studentRoutes = require('./routes/student');
 const sweeperRoutes = require('./routes/sweeper');
 const notificationRoutes = require('./routes/notifications');
 const { checkDueDatesAndNotify } = require('./controllers/notificationController');
+const rateLimiter = require('./middleware/rateLimiter');
+
+
+// Or apply only to certain routes
+// app.use('/api/student', rateLimiter, studentRoutes);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+app.use(rateLimiter);
 app.use(cors());
 app.use(express.json());
 
